@@ -10,10 +10,10 @@ class Supplier extends Model
     protected $table = 'supplier';
 
     protected $fillable = [
-        'nama_supplier',
-        'alamat',
-        'no_hp',
-    ];
+    'nama_supplier',
+    'alamat',
+    'no_hp',
+];
 
     public function barangMasuk(): HasMany
     {

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\SupplierController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -34,12 +35,13 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
+        ->name('dashboard');
 
     Route::resource('kategori', KategoriController::class);
+
+    Route::resource('supplier', SupplierController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
 });
-
 
