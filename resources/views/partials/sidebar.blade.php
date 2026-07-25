@@ -53,14 +53,14 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('barang-masuk.index') }}">
             <i class="fas fa-arrow-circle-down"></i>
             <span>Barang Masuk</span>
         </a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('barang-keluar.index') }}">
             <i class="fas fa-arrow-circle-up"></i>
             <span>Barang Keluar</span>
         </a>
