@@ -271,7 +271,24 @@ Masuk ke Sistem
 © {{ date('Y') }}
 
 Toko Bangunan Bina Guna
+<hr>
 
+<div class="alert alert-info">
+
+    <h6 class="font-weight-bold mb-2">
+        <i class="fas fa-info-circle"></i>
+        Akun Demo
+    </h6>
+
+    <p class="mb-1">
+        <strong>Email :</strong> admin@gmail.com
+    </p>
+
+    <p class="mb-0">
+        <strong>Password :</strong> admin123
+    </p>
+
+</div>
 </div>
 
 </div>
