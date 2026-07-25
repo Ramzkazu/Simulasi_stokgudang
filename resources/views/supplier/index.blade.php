@@ -7,6 +7,18 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Supplier</h1>
 
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+
+            <button type="button"
+                    class="close"
+                    data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        </div>
+    @endif
+
     <a href="{{ route('supplier.create') }}" class="btn btn-primary btn-sm">
     <i class="fas fa-plus"></i>
     Tambah Supplier
@@ -48,15 +60,28 @@
                             <td>{{ $item->no_hp }}</td>
 
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                    Edit
-                                </a>
+                                <a href="{{ route('supplier.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </a>
 
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                    Hapus
-                                </button>
+                                <form action="{{ route('supplier.destroy', $item->id) }}"
+                                    method="POST"
+                                    class="d-inline">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus supplier ini?')">
+
+                                        <i class="fas fa-trash"></i>
+                                        Hapus
+                                    </button>
+
+                                </form>
                             </td>
                         </tr>
 

@@ -40,7 +40,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('barang.index') }}">
             <i class="fas fa-boxes"></i>
             <span>Barang</span>
         </a>

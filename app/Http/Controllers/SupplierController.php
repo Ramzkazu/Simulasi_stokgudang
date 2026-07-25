@@ -64,7 +64,7 @@ public function store(Request $request)
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return view('supplier.edit', compact('supplier'));
     }
 
     /**
@@ -72,7 +72,17 @@ public function store(Request $request)
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $validated = $request->validate([
+            'nama_supplier' => 'required|max:100',
+            'alamat'        => 'required',
+            'no_hp'         => 'required|max:20',
+        ]);
+
+        $supplier->update($validated);
+
+        return redirect()
+            ->route('supplier.index')
+            ->with('success', 'Supplier berhasil diperbarui.');
     }
 
     /**
@@ -80,6 +90,10 @@ public function store(Request $request)
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        $supplier->delete();
+
+        return redirect()
+            ->route('supplier.index')
+            ->with('success', 'Supplier berhasil dihapus.');
     }
 }
