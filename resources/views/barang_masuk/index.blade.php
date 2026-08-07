@@ -45,7 +45,6 @@
                         <th>Tanggal</th>
                         <th>Barang</th>
                         <th>Supplier</th>
-                        <th>Tanggal Masuk</th>
                         <th>Jumlah</th>
                         <th>Aksi</th>
                     </tr>
@@ -57,10 +56,9 @@
 
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->tanggal_masuk }}</td>
+                        <td>{{ $item->tanggal }}</td>
                         <td>{{ $item->barang->nama_barang }}</td>
                         <td>{{ $item->supplier->nama_supplier }}</td>
-                        <td>{{ $item->tanggal }}</td>
                         <td>{{ $item->jumlah }}</td>
 
                         <td>

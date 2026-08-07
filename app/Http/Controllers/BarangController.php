@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BarangController extends Controller
 {
@@ -43,7 +44,21 @@ class BarangController extends Controller
             'harga_jual' => 'required|numeric|min:0',
             'stok' => 'required|integer|min:0',
             'satuan' => 'required|max:20',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+
+            $namaFile = time() . '_' . $file->getClientOriginalName();
+
+            $file->move(
+                public_path('uploads/barang'),
+                $namaFile
+            );
+
+            $validated['foto'] = $namaFile;
+        }
 
         Barang::create($validated);
 
@@ -83,7 +98,32 @@ class BarangController extends Controller
         'harga_jual'  => 'required|numeric|min:0',
         'stok'        => 'required|integer|min:0',
         'satuan'      => 'required|max:20',
+        'foto'        => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
+
+    if ($request->hasFile('foto')) {
+
+        // Hapus foto lama jika ada
+        if ($barang->foto) {
+            $fotoLama = public_path('uploads/barang/' . $barang->foto);
+
+            if (File::exists($fotoLama)) {
+                File::delete($fotoLama);
+            }
+        }
+
+        // Simpan foto baru
+        $file = $request->file('foto');
+
+        $namaFile = time() . '_' . $file->getClientOriginalName();
+
+        $file->move(
+            public_path('uploads/barang'),
+            $namaFile
+        );
+
+        $validated['foto'] = $namaFile;
+    }
 
     $barang->update($validated);
 
@@ -100,6 +140,16 @@ class BarangController extends Controller
  */
 public function destroy(Barang $barang)
 {
+    // Hapus foto barang jika ada
+    if ($barang->foto) {
+        $fotoPath = public_path('uploads/barang/' . $barang->foto);
+
+        if (File::exists($fotoPath)) {
+            File::delete($fotoPath);
+        }
+    }
+
+    // Hapus data barang
     $barang->delete();
 
     return redirect()

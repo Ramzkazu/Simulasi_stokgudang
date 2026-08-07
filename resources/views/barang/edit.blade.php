@@ -23,7 +23,7 @@
 
     <div class="card-body">
 
-        <form action="{{ route('barang.update', $barang->id) }}" method="POST">
+        <form action="{{ route('barang.update', $barang->id) }}" method="POST" enctype="multipart/form-data">
 
             @csrf
             @method('PUT')
@@ -107,6 +107,36 @@
                     @endforeach
 
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label>Foto Barang</label>
+
+                @if ($barang->foto)
+                    <div class="mb-3">
+                        <img
+                            src="{{ asset('uploads/barang/' . $barang->foto) }}"
+                            alt="{{ $barang->nama_barang }}"
+                            width="120"
+                            height="120"
+                            style="object-fit: cover; border-radius: 8px;">
+                    </div>
+                @else
+                    <p class="text-muted">
+                        Belum ada foto barang.
+                    </p>
+                @endif
+
+                <input
+                    type="file"
+                    name="foto"
+                    class="form-control-file"
+                    accept="image/*">
+
+                <small class="form-text text-muted">
+                    Pilih foto baru jika ingin mengganti foto.
+                    Format JPG, JPEG, PNG. Maksimal 2 MB.
+                </small>
             </div>
 
             <button type="submit" class="btn btn-primary">

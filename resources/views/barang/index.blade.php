@@ -42,6 +42,7 @@
                 <thead>
                     <tr>
                         <th width="60">No</th>
+                        <th>Foto</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Kategori</th>
@@ -59,6 +60,20 @@
 
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>
+                            @if ($item->foto)
+                                <img
+                                    src="{{ asset('uploads/barang/' . $item->foto) }}"
+                                    alt="{{ $item->nama_barang }}"
+                                    width="60"
+                                    height="60"
+                                    style="object-fit: cover; border-radius: 8px;">
+                            @else
+                                <span class="text-muted">
+                                    Tidak ada foto
+                                </span> 
+                            @endif
+                        </td>
                         <td>{{ $item->kode_barang }}</td>
                         <td>{{ $item->nama_barang }}</td>
                         <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>

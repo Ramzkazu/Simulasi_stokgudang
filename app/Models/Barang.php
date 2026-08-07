@@ -18,6 +18,7 @@ class Barang extends Model
         'harga_jual',
         'stok',
         'satuan',
+        'foto',
     ];
 
     public function kategori(): BelongsTo
